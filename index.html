@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaishnabi Panthi — Python & Django Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════
+   THEME TOKENS
+════════════════════════════ */
+:root {
+  /* dark default */
+  --bg:        #141210;
+  --bg2:       #1C1916;
+  --bg3:       #252018;
+  --surface:   #2A241D;
+  --line:      #3A3028;
+  --ink:       #F2EBE0;
+  --ink-soft:  #C4AE94;
+  --ink-faint: #7A6A56;
+  --accent:    #C49A6C;
+  --accent2:   #8B5E3C;
+  --accent-glow: rgba(196,154,108,0.18);
+  --nav-bg:    rgba(20,18,16,0.88);
+  --shadow:    0 4px 24px rgba(0,0,0,0.4);
+}
+[data-theme="light"] {
+  --bg:        #FAF7F2;
+  --bg2:       #F2EBE0;
+  --bg3:       #EDE3D3;
+  --surface:   #FFFFFF;
+  --line:      #DDD0BC;
+  --ink:       #1A0F05;
+  --ink-soft:  #5A3E26;
+  --ink-faint: #9A7D60;
+  --accent:    #8B5E3C;
+  --accent2:   #5C3A1E;
+  --accent-glow: rgba(139,94,60,0.12);
+  --nav-bg:    rgba(250,247,242,0.92);
+  --shadow:    0 4px 24px rgba(90,60,20,0.12);
+}
+
+/* ════════════════════════════
+   RESET & BASE
+════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
+}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+img{display:block;max-width:100%;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px;}
+
+/* ════════════════════════════
+   NAV
+════════════════════════════ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  transition:background .3s;
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  height:68px;
+}
+.logo{
+   font-family:'Playfair Display',serif;
+    font-size:18px;
+    font-weight:700;
+    color:var(--accent);
+    letter-spacing:1px;
+}
+.nav-links{
+  display:flex;gap:30px;
+  font-size:14px;font-weight:500;color:var(--ink-soft);
+}
+.nav-links a{
+  position:relative;padding:4px 0;
+  transition:color .2s;
+}
+.nav-links a::after{
+  content:"";position:absolute;
+  left:0;bottom:-2px;
+  width:0;height:2px;
+  background:var(--accent);
+  border-radius:2px;
+  transition:width .25s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+
+.nav-right{display:flex;align-items:center;gap:12px;}
+
+/* theme toggle */
+.theme-btn{
+  width:44px;height:24px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  cursor:pointer;
+  position:relative;
+  transition:background .3s;
+  flex-shrink:0;
+}
+.theme-btn::after{
+  content:"";
+  position:absolute;
+  top:3px;left:3px;
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--accent);
+  transition:left .3s,background .3s;
+}
+[data-theme="light"] .theme-btn::after{left:23px;}
+.theme-icon{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5px;font-size:10px;pointer-events:none;
+}
+
+.btn-hire{
+  background:var(--accent);color:#fff;
+  padding:9px 22px;border-radius:8px;
+  font-size:14px;font-weight:600;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.btn-hire:hover{background:var(--accent2);transform:translateY(-1px);}
+
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;background:none;border:none;padding:4px;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s;}
+
+.mob-menu{
+  display:none;flex-direction:column;
+  padding:12px 28px 20px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--line);
+}
+.mob-menu a{
+  padding:11px 0;font-size:15px;font-weight:500;
+  color:var(--ink-soft);border-bottom:1px solid var(--line);
+}
+.mob-menu.open{display:flex;}
+
+@media(max-width:780px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .btn-hire{display:none;}
+}
+
+/* ════════════════════════════
+   BUTTONS
+════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 24px;border-radius:9px;
+  font-size:14.5px;font-weight:600;cursor:pointer;
+  border:1.5px solid transparent;
+  transition:all .2s;
+}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 20px var(--accent-glow);}
+.btn-outline{background:transparent;color:var(--accent);border-color:var(--accent);}
+.btn-outline:hover{background:var(--accent);color:#fff;transform:translateY(-2px);}
+.btn-sm{padding:8px 16px;font-size:13px;}
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding-top:68px;
+  position:relative;overflow:hidden;
+}
+/* decorative background blobs */
+.hero-blob{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  pointer-events:none;
+}
+.blob1{width:500px;height:500px;background:rgba(196,154,108,0.08);top:-100px;right:-100px;}
+.blob2{width:300px;height:300px;background:rgba(139,94,60,0.06);bottom:50px;left:-80px;}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:72px;align-items:center;
+  width:100%;padding:60px 0;
+}
+@media(max-width:820px){
+  .hero-inner{grid-template-columns:1fr;gap:44px;text-align:center;}
+  .hero-inner .photo-wrap{order:-1;margin:0 auto;}
+}
+
+.hero-sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+@media(max-width:820px){.hero-sub{justify-content:center;}}
+.hero-sub .line{width:32px;height:1px;background:var(--accent);}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,68px);
+  font-weight:700;line-height:1.06;
+  color:var(--ink);
+  margin-bottom:18px;
+}
+.hero h1 span{color:var(--accent);}
+
+.hero-role{
+  font-size:18px;font-weight:600;
+  color:var(--ink-soft);
+  margin-bottom:20px;
+}
+
+.hero-desc{
+  font-size:16px;color:var(--ink-faint);
+  max-width:440px;margin-bottom:34px;line-height:1.75;
+}
+@media(max-width:820px){.hero-desc{margin:0 auto 34px;}}
+
+.hero-actions{
+  display:flex;gap:14px;flex-wrap:wrap;
+  margin-bottom:40px;
+}
+@media(max-width:820px){.hero-actions{justify-content:center;}}
+
+.hero-socials{
+  display:flex;gap:14px;flex-wrap:wrap;
+  align-items:center;
+}
+@media(max-width:820px){.hero-socials{justify-content:center;}}
+.social-link{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--surface);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:var(--ink-soft);
+  transition:all .2s;
+}
+.social-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+/* photo */
+.photo-wrap{
+  position:relative;flex-shrink:0;
+}
+.photo-ring{
+  width:280px;height:320px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:var(--bg3);
+  border:2px solid var(--line);
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow), 0 0 0 8px var(--accent-glow);
+}
+.photo-ring img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.photo-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;color:var(--ink-faint);
+  font-size:13px;font-family:'JetBrains Mono',monospace;text-align:center;padding:24px;
+}
+.photo-placeholder svg{opacity:.4;}
+/* floating badge on photo */
+.photo-badge{
+  position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;
+  padding:8px 18px;border-radius:999px;
+  font-size:12.5px;font-weight:600;
+  white-space:nowrap;
+  box-shadow:0 4px 16px rgba(196,154,108,0.35);
+}
+@media(max-width:480px){.photo-ring{width:200px;height:240px;}}
+
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-faint);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+.scroll-hint svg{opacity:.5;}
+
+/* ════════════════════════════
+   ABOUT
+════════════════════════════ */
+.section{padding:90px 0;border-top:1px solid var(--line);}
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,40px);
+  font-weight:700;color:var(--ink);
+  margin-bottom:44px;
+}
+.accent-line{
+  display:inline-block;
+  width:48px;height:3px;background:var(--accent);
+  border-radius:3px;margin-left:12px;
+  vertical-align:middle;
+}
+
+.about-grid{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+
+.about-img{
+  width:260px;height:300px;flex-shrink:0;
+  border-radius:16px;
+  background:var(--bg3);border:1px solid var(--line);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.about-img .ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;color:var(--ink-faint);
+  font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:20px;
+}
+@media(max-width:820px){.about-img{width:100%;height:200px;}}
+
+.about-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-bottom:24px;
+}
+@media(max-width:560px){.about-stats{grid-template-columns:1fr 1fr;}}
+.stat{
+  background:var(--bg3);border:1px solid var(--line);
+  border-radius:12px;padding:16px;text-align:center;
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;color:var(--accent);
+}
+.stat-label{font-size:12px;color:var(--ink-faint);margin-top:3px;}
+
+.about-text{font-size:15.5px;color:var(--ink-soft);line-height:1.8;}
+.about-text strong{color:var(--ink);font-weight:600;}
+.about-text p{margin-bottom:16px;}
+.services-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:28px;
+
+margin-top:55px;
+
+}
+
+
+/*=========================
+      WHAT I OFFER
+=========================*/
+
+.service-carousel{
+    position:relative;
+    margin-top:55px;
+    padding:0 32px;
+    overflow:visible;
+}
+
+.service-controls{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    transform:translateY(-50%);
+    z-index:20;
+    pointer-events:none;
+}
+
+.service-viewport{
+    overflow:hidden;
+    padding:10px 0;
+}
+
+.service-track{
+    display:flex;
+    gap:24px;
+    transition:transform .45s ease;
+}
+
+.service-slide{
+    flex:0 0 calc((100% - 48px)/3);
+}
+
+.service-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    min-height:285px;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.service-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--accent);
+    box-shadow:var(--shadow);
+}
+
+.service-card:active{
+    transform:translateY(-2px) scale(.98);
+}
+
+.service-icon{
+    width:58px;
+    height:58px;
+
+    border-radius:12px;
+
+    background:var(--bg3);
+    border:1px solid var(--line);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:var(--accent);
+    font-size:26px;
+
+    margin-bottom:18px;
+}
+
+.service-card h3{
+    font-size:18px;
+    font-family:'Playfair Display',serif;
+    color:var(--ink);
+    margin-bottom:10px;
+}
+
+.service-card p{
+    font-size:14px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    flex:1;
+    margin-bottom:18px;
+}
+
+.service-btn{
+    margin-top:auto;
+    border:none;
+    background:none;
+    color:var(--accent);
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.service-btn i{
+    transition:.3s;
+}
+
+.service-btn:hover i{
+    transform:translateX(6px);
+}
+
+/*=========================
+      ARROWS
+=========================*/
+
+.service-nav{
+
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:54px;
+    height:54px;
+
+    border:none;
+    border-radius:50%;
+
+    background:var(--accent);
+    color:#fff;
+
+    font-size:22px;
+    font-weight:bold;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+.service-nav:hover{
+
+    background:var(--accent2);
+
+    transform:translateY(-50%) scale(1.08);
+
+}
+
+.service-prev{
+    left:6px;
+}
+
+.service-next{
+    right:6px;
+}
+
+/*=========================
+      RESPONSIVE
+=========================*/
+
+@media(max-width:900px){
+
+.service-slide{
+    flex:0 0 calc((100% - 24px)/2);
+}
+
+}
+
+@media(max-width:640px){
+
+.service-slide{
+    flex:0 0 100%;
+}
+
+.service-nav{
+
+    width:46px;
+    height:46px;
+
+    font-size:18px;
+
+}
+
+.service-prev{
+    left:-10px;
+}
+
+.service-next{
+    right:-10px;
+}
+
+}
+
+@media(max-width:900px){
+
+.service-slide{
+flex:0 0 calc((100% - 24px)/2);
+}
+
+}
+
+@media(max-width:600px){
+
+.service-slide{
+flex:0 0 100%;
+}
+}
+
+
+.service-modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.6);
+    backdrop-filter:blur(8px);
+    z-index:9999;
+}
+
+.modal-content{
+    width:520px;
+    max-width:92%;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:35px;
+    position:relative;
+    animation:popup .35s ease;
+}
+
+.modal-content h3{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    color:var(--ink);
+    margin-bottom:22px;
+}
+
+.modal-content ul{
+    display:grid;
+    gap:14px;
+    padding:0;
+    margin:0;
+}
+
+.modal-content li{
+    list-style:none;
+    color:var(--ink-soft);
+    line-height:1.7;
+}
+
+.close-modal{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    color:var(--accent);
+    cursor:pointer;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* ════════════════════════════
+   EXPERIENCE
+════════════════════════════ */
+.exp-card{
+  background:var(--surface);border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:14px;padding:28px 30px;
+  box-shadow:var(--shadow);max-width:780px;
+}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.exp-top h3{font-size:20px;font-weight:700;color:var(--ink);font-family:'Playfair Display',serif;}
+.exp-top .sub{font-size:14px;color:var(--ink-faint);margin-top:3px;font-family:'JetBrains Mono',monospace;}
+.badge{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  background:var(--accent-glow);border:1px solid var(--line);
+  padding:5px 12px;border-radius:999px;color:var(--accent);
+  white-space:nowrap;
+}
+.exp-list li{
+  display:flex;gap:10px;font-size:14.5px;color:var(--ink-soft);
+  padding:6px 0;border-bottom:1px solid var(--line);
+}
+.exp-list li:last-child{border:none;}
+.exp-list li::before{content:"→";color:var(--accent);font-weight:700;flex-shrink:0;}
+
+/* ════════════════════════════
+   PROJECTS
+════════════════════════════ */
+.proj-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+}
+@media(max-width:860px){.proj-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.proj-grid{grid-template-columns:1fr;}}
+
+.proj-card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;padding:24px;
+  display:flex;flex-direction:column;
+  transition:transform .22s,box-shadow .22s,border-color .22s;
+}
+.proj-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--accent);}
+.proj-live{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  text-transform:uppercase;letter-spacing:.05em;
+  color:var(--accent);margin-bottom:12px;
+}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(196,154,108,.45);}70%{box-shadow:0 0 0 7px rgba(196,154,108,0);}100%{box-shadow:0 0 0 0 rgba(196,154,108,0);}}
+.proj-card h3{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px;font-family:'Playfair Display',serif;}
+.proj-card p{font-size:13.5px;color:var(--ink-soft);flex-grow:1;margin-bottom:14px;line-height:1.7;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.proj-tags span{
+  font-size:11px;font-family:'JetBrains Mono',monospace;
+  background:var(--bg3);border:1px solid var(--line);
+  padding:3px 8px;border-radius:5px;color:var(--ink-faint);
+}
+.proj-links{display:flex;gap:8px;margin-top:auto;}
+
+/* ════════════════════════════
+   CONTACT
+════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:52px;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+
+.contact-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,3.5vw,36px);color:var(--ink);margin-bottom:14px;
+}
+.contact-text p{font-size:15px;color:var(--ink-soft);margin-bottom:28px;}
+.c-links{display:flex;flex-direction:column;gap:12px;}
+.c-link{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;font-size:14.5px;font-weight:500;
+  transition:border-color .2s,transform .15s;
+}
+.c-link:hover{border-color:var(--accent);transform:translateX(4px);}
+.c-ico{
+  width:36px;height:36px;border-radius:9px;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:var(--accent);flex-shrink:0;border:1px solid var(--line);
+}
+
+.c-form{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;padding:28px;box-shadow:var(--shadow);
+}
+.f-row{margin-bottom:16px;}
+.f-row label{
+  display:block;
+  font-size:11.5px;font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-faint);margin-bottom:7px;
+}
+.f-row input,.f-row textarea{
+  width:100%;padding:12px 15px;
+  border:1px solid var(--line);border-radius:8px;
+  font-family:'Inter',sans-serif;font-size:14.5px;
+  background:var(--bg);color:var(--ink);
+  resize:vertical;transition:border .2s,box-shadow .2s;
+}
+.f-row input:focus,.f-row textarea:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+
+/* ════════════════════════════
+   FOOTER
+════════════════════════════ */
+footer{
+  background:var(--bg2);border-top:1px solid var(--line);
+  padding:28px 0;
+}
+.foot-row{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--ink-faint);
+}
+.foot-links{display:flex;gap:20px;}
+.foot-links a{color:var(--ink-faint);transition:color .2s;}
+.foot-links a:hover{color:var(--accent);}
+
+/* ════════════════════════════
+   ANIMATIONS
+════════════════════════════ */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.68,0,1.1),transform .7s cubic-bezier(.22,.68,0,1.1);}
+.fade.in,
+.section.show .fade{opacity:1;transform:none;}
+.fade-d1{transition-delay:.1s;}
+.fade-d2{transition-delay:.2s;}
+.fade-d3{transition-delay:.3s;}
+.stagger>*{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.stagger.in>*:nth-child(1){transition-delay:.05s;}
+.stagger.in>*:nth-child(2){transition-delay:.13s;}
+.stagger.in>*:nth-child(3){transition-delay:.21s;}
+.stagger.in>*:nth-child(4){transition-delay:.29s;}
+.stagger.in>*:nth-child(5){transition-delay:.37s;}
+.stagger.in>*:nth-child(6){transition-delay:.45s;}
+.stagger.in>*,
+.section.show .stagger>*{opacity:1;transform:none;}
+
+/* hero starts visible */
+.hero-text>*{
+  opacity:0;transform:translateY(18px);
+  animation:heroIn .7s forwards;
+}
+
+.hero-text>*:nth-child(1){animation-delay:.1s;}
+.hero-text>*:nth-child(2){animation-delay:.2s;}
+.hero-text>*:nth-child(3){animation-delay:.3s;}
+.hero-text>*:nth-child(4){animation-delay:.4s;}
+.hero-text>*:nth-child(5){animation-delay:.5s;}
+.hero-text>*:nth-child(6){animation-delay:.6s;}
+.photo-wrap{opacity:0;animation:heroIn .9s .5s forwards;}
+@keyframes heroIn{to{opacity:1;transform:none;}}
+.section{
+    opacity:0;
+    transform:translateY(50px);
+    transition:opacity .7s ease, transform .7s ease;
+}
+
+.section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header>
+  <div class="wrap nav">
+    <a href="#home" class="logo">VAISHANBI PANTHI</a>
+    <nav class="nav-links">
+      <a href="#about" data-nav>About</a>
+      <a href="#services" data-nav>Services</a>
+      <a href="#experience" data-nav>Experience</a>
+      <a href="#projects" data-nav>Projects</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme">
+        <div class="theme-icon"><span>🌙</span><span>☀️</span></div>
+      </button>
+      <a class="btn-hire" href="#contact">Hire Me</a>
+      <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mob-menu" id="mobMenu">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══ HERO ══ -->
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+    <div class="hero-blob blob1"></div>
+    <div class="hero-blob blob2"></div>
+
+    <div class="wrap">
+        <div class="hero-inner">
+
+            <!-- Left Side -->
+            <div class="hero-text">
+
+                <p class="hero-sub">
+                    <span class="line"></span>
+                    Hello, I'm
+                </p>
+
+                <h1>
+                    Vaishnabi<br>
+                    <span>Panthi.</span>
+                </h1>
+
+                <p class="hero-role">
+                    Python &amp; Django Developer / Freelancer
+                </p>
+
+                <p class="hero-desc">
+                    I build scalable backend systems, clean REST APIs, and full-stack web applications that solve real problems.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        View My Work
+                    </a>
+
+                    <a href="#contact" class="btn btn-outline">
+                        Contact Me
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="hero-socials">
+
+                    <a href="https://github.com/vaishnabipanthi"
+                       target="_blank"
+                       class="social-link"
+                       title="GitHub">
+                        GH
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/vaishnabi-panthi-460771319/"
+                       target="_blank"
+                       class="social-link"
+                       title="LinkedIn">
+                        LI
+                    </a>
+
+                    <a href="https://www.facebook.com/profile.php?id=61576482054954"
+                       target="_blank"
+                       class="social-link"
+                       title="Facebook">
+                        FB
+                    </a>
+
+                    <a href="https://x.com/Panthi_vaishu"
+                       target="_blank"
+                       class="social-link"
+                       title="X">
+                        X
+                    </a>
+
+                    <a href="https://www.hackerrank.com/profile/vaishnavipanthi1"
+                       target="_blank"
+                       class="social-link"
+                       title="HackerRank">
+                        HR
+                    </a>
+
+                    <a href="mailto:vaishnavipanthi99@gmail.com"
+                       class="social-link"
+                       title="Email">
+                        @
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side Photo -->
+            <div class="photo-wrap">
+
+                <div class="photo-ring">
+                    <img src="vaishanbi-panthi.png"
+                         alt="Vaishnabi Panthi">
+                </div>
+
+                <div class="photo-badge">
+                    ✦ Open to Work
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scroll -->
+    <a href="#about" class="scroll-hint">
+
+        <svg width="16"
+             height="22"
+             viewBox="0 0 16 22"
+             fill="none">
+
+            <rect x="1"
+                  y="1"
+                  width="14"
+                  height="20"
+                  rx="7"
+                  stroke="#C49A6C"
+                  stroke-width="1.5"/>
+
+            <circle cx="8"
+                    cy="7"
+                    r="2"
+                    fill="#C49A6C"/>
+
+        </svg>
+
+        Scroll Down
+
+    </a>
+
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="section" id="about">
+
+    <div class="wrap">
+        <p class="section-label fade">
+            My Intro
+        </p>
+        <h2 class="section-title fade fade-d1">
+            About Me
+            <span class="accent-line"></span>
+        </h2>
+        <div class="about-grid">
+ <!-- Photo -->
+            <div class="about-img fade">
+                <img src="vaishanbi-panthi.png" alt="Vaishnabi Panthi">
+            </div>
+            <!-- About Content -->
+            <div>
+                <div class="about-stats fade fade-d1">
+
+                    <div class="stat">
+                        <div class="stat-num">1+</div>
+                        <div class="stat-label">
+                            Year Experience
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-num">10+</div>
+                        <div class="stat-label">
+                            Projects Built
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-num">15+</div>
+                        <div class="stat-label">
+                            Technologies
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="about-text fade fade-d2">
+
+                   <p>
+                    
+<strong>"Hi, I'm Vaishnabi Panthi. I turn complex logic into clean, functional web experiences."<br></strong>
+Full-Stack Web Developer specialized in Python, Django, and JavaScript.<br>
+From designing fluid frontends to architecting robust backends.<br>
+I build end-to-end applications that solve real-world problems.
+                   </p>
+                    <div style="margin-top:25px; display:flex; gap:15px; flex-wrap:wrap;">
+
+                        <a href="#contact" class="btn btn-primary">
+                            Hire Me
+                        </a>
+
+                        <a href="resume copy.pdf"
+                           download
+                           class="btn btn-outline">
+                            Download Resume
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </section>
+
+
+
+<!--==================== WHAT I OFFER ====================-->
+
+<section class="section" id="services">
+
+    <div class="wrap">
+
+        <p class="section-label fade">
+            My Services
+        </p>
+
+        <h2 class="section-title fade fade-d1">
+            What I Offer
+            <span class="accent-line"></span>
+        </h2>
+
+        <div class="service-carousel fade">
+            <div class="service-controls">
+                <button class="service-nav service-prev" type="button" aria-label="Scroll left">←</button>
+                <button class="service-nav service-next" type="button" aria-label="Scroll right">→</button>
+            </div>
+
+            <div class="service-viewport">
+                <div class="service-track">
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-code-box-line"></i></div>
+                            <h3>Python & Django</h3>
+                            <p>Secure and scalable backend web development.</p>
+                            <button class="service-btn" data-modal="pythonModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-layout-4-line"></i></div>
+                            <h3>Full Stack</h3>
+                            <p>Responsive websites with modern UI & backend.</p>
+                            <button class="service-btn" data-modal="fullstackModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-links-line"></i></div>
+                            <h3>REST APIs</h3>
+                            <p>Secure APIs with authentication & integration.</p>
+                            <button class="service-btn" data-modal="apiModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-database-2-line"></i></div>
+                            <h3>Database</h3>
+                            <p>Efficient database design & optimization.</p>
+                            <button class="service-btn" data-modal="databaseModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-cloud-line"></i></div>
+                            <h3>Deployment</h3>
+                            <p>Deploy & maintain reliable web applications.</p>
+                            <button class="service-btn" data-modal="deployModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="service-slide">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="ri-briefcase-4-line"></i></div>
+                            <h3>Freelancing</h3>
+                            <p>Custom software solutions for clients.</p>
+                            <button class="service-btn" data-modal="freelanceModal">See More <i class="ri-arrow-right-line"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!--==================== MODALS ====================-->
+
+<!-- Python -->
+
+<div class="service-modal" id="pythonModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>Python & Django</h3>
+
+<ul>
+
+<li>✔ Custom Django Applications</li>
+
+<li>✔ Backend Development</li>
+
+<li>✔ Django REST Framework</li>
+
+<li>✔ Authentication System</li>
+
+<li>✔ Admin Dashboard</li>
+
+<li>✔ Payment Integration</li>
+
+<li>✔ Database Integration</li>
+
+<li>✔ Deployment Support</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- Full Stack -->
+
+<div class="service-modal" id="fullstackModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>Full Stack Development</h3>
+
+<ul>
+
+<li>✔ Responsive Websites</li>
+
+<li>✔ HTML CSS JavaScript</li>
+
+<li>✔ Frontend & Backend</li>
+
+<li>✔ Dynamic Web Apps</li>
+
+<li>✔ User Authentication</li>
+
+<li>✔ Clean UI Design</li>
+
+<li>✔ API Integration</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- API -->
+
+<div class="service-modal" id="apiModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>REST API Development</h3>
+
+<ul>
+
+<li>✔ CRUD APIs</li>
+
+<li>✔ JWT Authentication</li>
+
+<li>✔ API Integration</li>
+
+<li>✔ Secure Endpoints</li>
+
+<li>✔ Error Handling</li>
+
+<li>✔ Documentation</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- Database -->
+
+<div class="service-modal" id="databaseModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>Database Design</h3>
+
+<ul>
+
+<li>✔ PostgreSQL</li>
+
+<li>✔ MySQL</li>
+
+<li>✔ SQLite</li>
+
+<li>✔ Query Optimization</li>
+
+<li>✔ Relationships</li>
+
+<li>✔ Data Validation</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- Deployment -->
+
+<div class="service-modal" id="deployModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>Deployment</h3>
+
+<ul>
+
+<li>✔ Render</li>
+
+<li>✔ Railway</li>
+
+<li>✔ PythonAnywhere</li>
+
+<li>✔ Domain Setup</li>
+
+<li>✔ Environment Variables</li>
+
+<li>✔ Performance Optimization</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- Freelance -->
+
+<div class="service-modal" id="freelanceModal">
+
+<div class="modal-content">
+
+<span class="close-modal">&times;</span>
+
+<h3>Freelance Solutions</h3>
+
+<ul>
+
+<li>✔ Portfolio Websites</li>
+
+<li>✔ Business Websites</li>
+
+<li>✔ Backend Development</li>
+
+<li>✔ API Development</li>
+
+<li>✔ Bug Fixing</li>
+
+<li>✔ Project Maintenance</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ══ EXPERIENCE ══ -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <p class="section-label fade">Where I've Worked</p>
+    <h2 class="section-title fade fade-d1">Experience <span class="accent-line"></span></h2>
+    <div class="exp-card fade fade-d2">
+      <div class="exp-top">
+        <div>
+          <h3>Backend Development Intern</h3>
+          <p class="sub">NullClass</p>
+        </div>
+        <span class="badge">Internship</span>
+      </div>
+      <ul class="exp-list">
+        <li>Built a full Django movie ticket booking application from scratch</li>
+        <li>Integrated Razorpay for secure, live payment processing</li>
+        <li>Implemented seat reservation and automated email confirmations</li>
+        <li>Designed an admin dashboard for managing movies, shows &amp; bookings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section class="section" id="projects" style="background:var(--bg2);">
+  <div class="wrap">
+    <p class="section-label fade">My Portfolio</p>
+    <h2 class="section-title fade fade-d1">Recent Projects <span class="accent-line"></span></h2>
+    <div class="proj-grid stagger">
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Live</span>
+        <h3>BookMySeat</h3>
+        <p>Movie ticket booking platform with real seat selection, Razorpay payments, and automated email confirmations.</p>
+        <div class="proj-tags"><span>Django</span><span>Python</span><span>Razorpay</span><span>Bootstrap</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/vaishnabipanthi/bookmyseat-final" target="_blank" rel="noopener">Code ↗</a>
+          <a class="btn btn-primary btn-sm" href="https://bookmyseat-final-production.up.railway.app" target="_blank" rel="noopener">Live ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Backend + Frontend</span>
+        <h3>Healthcare CRM &amp; QMS</h3>
+        <p>Clinic queue management and CRM — FastAPI backend with a React frontend for smooth real-world clinical workflows.</p>
+        <div class="proj-tags"><span>FastAPI</span><span>React</span><span>REST API</span><span>SQL</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/vaishnabipanthi" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Computer Vision</span>
+        <h3>Expenses Tracker App</h3>
+        <p>Expense Tracker App built using Node.js for managing daily income and expenses with real-time tracking and simple analytics.</p>
+        <div class="proj-tags"><span>Node.js</span><span>Express</span><span>MongoDB</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/vaishnabipanthi/expense-tracker-app" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Computer Vision</span>
+        <h3>Modern Login page</h3>
+        <p>Real-time human movement detection and tracking using Python, OpenCV, and MediaPipe.</p>
+        <div class="proj-tags"><span>HTML5</span><span>CSS3</span><span>JS</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/vaishnabipanthi/Login-page" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Computer Vision</span>
+        <h3>Resume builder</h3>
+        <p>AI-powered resume builder that generates ATS-friendly resumes,and exports professional resumes in PDF format.</p>
+        <div class="proj-tags"><span>React</span><span>Node.js</span><span>Typescript</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/ram22ram/ai-resume-builder" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-live"><span class="live-dot"></span> Computer Vision</span>
+        <h3>Card Grid</h3>
+        <p>Real-time human movement detection and tracking using Python, OpenCV, and MediaPipe.</p>
+        <div class="proj-tags"><span>HTML5</span><span>CSS3</span><span>Bootstrap</span></div>
+        <div class="proj-links">
+          <a class="btn btn-outline btn-sm" href="https://github.com/vaishnabipanthi/cognifyz-webdev-internship" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<!-- ══ CONTACT ══ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <p class="section-label fade">Get In Touch</p>
+    <div class="contact-grid">
+      <div class="fade">
+        <h2 class="contact-text" style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,36px);color:var(--ink);margin-bottom:14px;">Contact Me <span class="accent-line"></span></h2>
+        <p style="font-size:15px;color:var(--ink-soft);margin-bottom:28px;">Open to internships, full-time roles, and freelance projects. I reply within a day.</p>
+        <div class="c-links">
+
+<a href="mailto:vaishnavipanthi99@gmail.com" class="c-link">
+<span class="c-ico">@</span>
+vaishnavipanthi99@gmail.com
+</a>
+
+<a href="https://github.com/vaishnabipanthi" target="_blank" class="c-link">
+<span class="c-ico">GH</span>
+GitHub
+</a>
+
+<a href="https://www.linkedin.com/in/vaishnabi-panthi-460771319/" target="_blank" class="c-link">
+<span class="c-ico">IN</span>
+LinkedIn
+</a>
+</div>
+      </div>
+      <form class="c-form fade fade-d2" id="contactForm">
+        <div class="f-row"><label>Name</label><input name="name" type="text" placeholder="Your name" required></div>
+        <div class="f-row"><label>Email</label><input name="email" type="email" placeholder="you@email.com" required></div>
+        <div class="f-row"><label>Message</label><textarea name="message" rows="4" placeholder="Tell me about the opportunity..." required></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© <span id="yr"></span> Vaishnabi Panthi</span>
+    <div class="foot-links">
+      <a href="https://github.com/vaishnabipanthi" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/vaishnabi-panthi-460771319/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#home">↑ Top</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Year ──
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── Theme toggle ──
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+
+const saved = localStorage.getItem('vp-theme') || 'dark';
+root.setAttribute('data-theme', saved);
+
+themeBtn.addEventListener('click', () => {
+  const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', now);
+  localStorage.setItem('vp-theme', now);
+});
+
+// ── Mobile menu ──
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mobMenu');
+
+ham.addEventListener('click', () => mob.classList.toggle('open'));
+
+mob.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => mob.classList.remove('open'))
+);
+
+// ── Active nav ──
+const navAs = document.querySelectorAll('nav.nav-links a[data-nav]');
+const secs = ['about','services','experience','projects','contact']
+  .map(id => document.getElementById(id));
+
+window.addEventListener('scroll', () => {
+  let cur = null;
+
+  secs.forEach(s => {
+    if (!s) return;
+    const r = s.getBoundingClientRect();
+    if (r.top <= 120 && r.bottom >= 120) cur = s.id;
+  });
+
+  navAs.forEach(a =>
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur)
+  );
+});
+
+// ── Section reveal (FIXED) ──
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => observer.observe(sec));
+</script>
+</body>
+</html>
